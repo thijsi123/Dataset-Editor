@@ -6,7 +6,8 @@ This project provides a GUI for viewing images, editing associated text files, a
 
 - View images and edit associated text files
 - Tag autocomplete using various tag sources
-- Automatic download of missing tag files
+- Automatic download of missing tag files - Big thanks to DominikDoom (https://github.com/DominikDoom) the tags files are from [a1111-sd-webui-tagcomplete](https://github.com/DominikDoom/a1111-sd-webui-tagcomplete), which is licensed under the MIT License.
+
 
 ## Requirements
 
