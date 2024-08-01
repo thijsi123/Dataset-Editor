@@ -68,7 +68,8 @@ your-project-folder/
 │
 ├── image_tagger.py  # Your main script
 ├── .gitignore
+├── config.json # This file will be created by the script
 ├── README.md
 ├── requirements.txt
-└── tags/  # This folder will be created by the script when needed
+└── tags/  # This folder will be created by the script
 ```
