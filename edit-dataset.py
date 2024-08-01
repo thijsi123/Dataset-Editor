@@ -97,6 +97,8 @@ class ImageTextViewer:
                     text_path = os.path.join(self.directory, filename.rsplit('.', 1)[0] + '.txt')
                     if os.path.exists(text_path):
                         pairs.append((image_path, text_path))
+                    else:
+                        pairs.append((image_path, None))  # Include image files even if there is no text file
         return pairs
 
     def load_all_tags(self):
@@ -231,7 +233,11 @@ class ImageTextViewer:
         if 0 <= self.current_index < len(self.files):
             image_path, text_path = self.files[self.current_index]
             self.display_image(image_path)
-            self.display_text(text_path)
+            if text_path:
+                self.display_text(text_path)
+            else:
+                self.text_widget.delete("1.0", END)
+                self.text_widget.insert("1.0", "")
             self.image_listbox.selection_clear(0, END)
             self.image_listbox.selection_set(self.current_index)
             self.image_listbox.see(self.current_index)
@@ -252,11 +258,16 @@ class ImageTextViewer:
 
     def save_text(self):
         if 0 <= self.current_index < len(self.files):
-            _, text_path = self.files[self.current_index]
+            image_path, text_path = self.files[self.current_index]
+            if not text_path:
+                # If there's no associated text file, create one
+                text_path = image_path.rsplit('.', 1)[0] + '.txt'
+                self.files[self.current_index] = (image_path, text_path)  # Update the file pair with the new text path
+
             text = self.text_widget.get("1.0", END)
             with open(text_path, 'w') as file:
                 file.write(text)
-        print("Text saved successfully.")
+            print(f"Text saved successfully to {text_path}.")
 
     def next_file(self):
         if self.current_index < len(self.files) - 1:
