@@ -1,0 +1,13 @@
+# Ignore tags folder and its contents
+tags/
+
+# Ignore Python cache files
+__pycache__/
+*.pyc
+
+# Ignore IDE-specific files
+.vscode/
+.idea/
+
+# Ignore configuration file
+config.json
